@@ -17,6 +17,8 @@ arr.each do |item|
   end
 end
 
+p max
+
 # Part 2
 
 maxes = [0, 0, 0]
