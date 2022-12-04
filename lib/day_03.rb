@@ -37,3 +37,48 @@ arr.each do |rucksack|
 end
 
 p total
+
+# Part 2
+
+badges = []
+total = 0
+i = 0
+group_max = 2
+counts = Hash.new(0)
+
+while i < arr.size do
+  rucksack = arr[i]
+  rucksack_counts = Hash.new(0)
+  x = 0
+
+  while x < rucksack.size do
+    char = rucksack[x]
+
+    if rucksack_counts[char] == 0
+      rucksack_counts[char] += 1
+      counts[char] += 1
+    end
+
+    if counts[char] == 3
+      value = char.ord
+
+      if value >= 97
+        total += value - 96
+      else
+        total += value - 38
+      end
+      x = rucksack.size
+    else
+      x += 1
+    end
+  end
+
+  if i == group_max
+    counts = Hash.new(0)
+    group_max += 3
+  end
+
+  i += 1
+end
+
+p total
