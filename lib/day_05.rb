@@ -12,7 +12,6 @@ arr = arr[0...i]
 
 count = arr.pop
 
-# Part 1
 containers = Array.new(count[-1].to_i)
 containers.map! { |a| [] }
 
@@ -37,6 +36,8 @@ instructions.map! do |str|
   result = (/move (\d*) from (\d*) to (\d*)/).match(str)
   result.captures.map(&:to_i)
 end
+
+# Part 1
 
 instructions.each do |move|
   count, start, finish = move
