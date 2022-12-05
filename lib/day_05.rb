@@ -4,18 +4,6 @@ test = false
 day = '05'
 arr = create_array(file_path(day, test))
 
-# "    [D]",
-# "[N] [C]",
-# "[Z] [M] [P]
-# "1   2   3"
-
-# [
-#   "    [D]",
-#   "[N] [C]",
-#   "[Z] [M] [P]",
-#   "1   2   3"
-# ]
-
 i = 0
 i += 1 while arr[i] != ''
 
@@ -24,6 +12,7 @@ arr = arr[0...i]
 
 count = arr.pop
 
+# Part 1
 containers = Array.new(count[-1].to_i)
 containers.map! { |a| [] }
 
@@ -41,6 +30,9 @@ while !arr.empty? do
   end
 end
 
+part_2 = []
+containers.each { |a| part_2 << a.clone }
+
 instructions.map! do |str|
   result = (/move (\d*) from (\d*) to (\d*)/).match(str)
   result.captures.map(&:to_i)
@@ -53,6 +45,28 @@ instructions.each do |move|
     containers[finish - 1] << containers[start - 1].pop
   end
 
+end
+
+result = ""
+
+containers.each { |s| result << s[-1] }
+
+p result
+
+# Part 2
+
+containers = part_2
+
+instructions.each do |move|
+  count, start, finish = move
+
+  start = containers[start-1]
+  finish -= 1
+
+  mid = start.size - count
+  tmp = start.slice!(mid, count)
+
+  containers[finish].concat(tmp)
 end
 
 result = ""
