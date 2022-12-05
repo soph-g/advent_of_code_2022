@@ -24,8 +24,8 @@ while !arr.empty? do
     if row[i] == '['
       containers[c] << row[i+1]
     end
-      c += 1
-      i += 4
+    c += 1
+    i += 4
   end
 end
 
@@ -45,7 +45,6 @@ instructions.each do |move|
   count.times do
     containers[finish - 1] << containers[start - 1].pop
   end
-
 end
 
 result = ""
@@ -62,12 +61,11 @@ instructions.each do |move|
   count, start, finish = move
 
   start = containers[start-1]
-  finish -= 1
 
   mid = start.size - count
   tmp = start.slice!(mid, count)
 
-  containers[finish].concat(tmp)
+  containers[finish - 1].concat(tmp)
 end
 
 result = ""
