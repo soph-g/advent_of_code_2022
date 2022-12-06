@@ -27,13 +27,14 @@ while start < input.size - 3 && !marker_found do
     end
 
     if i == 4
+      start += i
       marker_found = true
       break
     end
   end
 end
 
-p start + 4
+p start
 
 # Part 2
 
@@ -56,10 +57,11 @@ while start < input.size - 13 && !marker_found do
     end
 
     if i == 14
+      start += i
       marker_found = true
       break
     end
   end
 end
 
-p start + 14
+p start
