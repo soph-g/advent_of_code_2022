@@ -27,17 +27,19 @@ stack
 ['/', 'plws', 'frcmjzts', 'bsltmjz']
 ['/', 'plws', 'frcmjzts']
 ['/', 'phqcg']
-
-
-
 =end
 
 class Navigator
-  attr_reader :totals
+  attr_reader :totals, :stack
+
+  AVAILABLE_SPACE = 70000000
+  REQUIRED_SPACE = 30000000
 
   def initialize
     @stack = []
+    @unique_key = []
     @totals = Hash.new(0)
+    @to_delete = 0
   end
 
   def read_lines(input)
@@ -64,9 +66,11 @@ class Navigator
     if line[2] == '/'
       @stack = ['/']
     elsif line[2] == '..'
-      @stack.pop if @stack.size > 1
+      @unique_key.pop
+      @stack.pop
     else
-      @stack << @stack.join('/') + '/' + line[2]
+      @unique_key << line[2]
+      @stack << @unique_key.join('/')
     end
   end
 
@@ -77,10 +81,32 @@ class Navigator
     end
     sum
   end
+
+  def to_delete
+    current_available = AVAILABLE_SPACE - @totals['/']
+    REQUIRED_SPACE - current_available
+  end
+
+  def find_smallest_directory
+    smallest = Float::INFINITY
+    totals.values.each do |val|
+      if val > to_delete
+        smallest = val if val < smallest
+      end
+    end
+
+    smallest
+  end
 end
 
 # Part 1
 
+# nav = Navigator.new
+# nav.read_lines(input)
+# p nav.fetch_totals(100000)
+
+# Part 2
+
 nav = Navigator.new
 nav.read_lines(input)
-p nav.fetch_totals(100000)
+p nav.find_smallest_directory
