@@ -27,6 +27,7 @@ stack
 ['/', 'plws', 'frcmjzts', 'bsltmjz']
 ['/', 'plws', 'frcmjzts']
 ['/', 'phqcg']
+This is where I went wrong! Needed to have a unique path as each individual key in my totals. This approach meant that the same directory name could appear in two different paths, and I would only be counting a single total. Whoops!
 =end
 
 class Navigator
@@ -89,6 +90,7 @@ class Navigator
 
   def find_smallest_directory
     smallest = Float::INFINITY
+
     totals.values.each do |val|
       if val > to_delete
         smallest = val if val < smallest
