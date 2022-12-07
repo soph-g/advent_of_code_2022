@@ -42,7 +42,6 @@ class Navigator
     @stack = []
     @unique_key = []
     @totals = Hash.new(0)
-    @to_delete = 0
   end
 
   def read_lines(input)
