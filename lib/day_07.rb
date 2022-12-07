@@ -101,9 +101,9 @@ end
 
 # Part 1
 
-# nav = Navigator.new
-# nav.read_lines(input)
-# p nav.fetch_totals(100000)
+nav = Navigator.new
+nav.read_lines(input)
+p nav.fetch_totals(100000)
 
 # Part 2
 
